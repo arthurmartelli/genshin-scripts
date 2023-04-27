@@ -1,0 +1,12 @@
+{
+  "cSpell.words": [
+    "Genshin",
+    "paimon",
+    "paimon's",
+    "psutil",
+    "pyautogui",
+    "pygetwindow",
+    "pygui"
+  ],
+  "python.analysis.typeCheckingMode": "basic"
+}
