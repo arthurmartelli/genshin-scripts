@@ -1,9 +1,10 @@
 [tool.poetry]
 name = "genshin-friendship"
 version = "0.1.0"
-description = ""
+description = "A Python project for automating tasks in Genshin Impact game"
 authors = ["Arthur Martelli <arthur.martellig@gmail.com>"]
 readme = "README.md"
+license = "MIT"
 packages = [{ include = "genshin_friendship" }]
 
 [tool.poetry.dependencies]
