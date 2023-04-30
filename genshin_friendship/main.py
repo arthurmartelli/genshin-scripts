@@ -20,7 +20,7 @@ Modules:
 - utils: Contains utility functions used by the bot script and the main function.
 """
 
-import process
+import scripts.friendship as friendship
 import utils
 
 
@@ -50,13 +50,13 @@ def main() -> None:
     iterations: int = 10
     game: str = "Genshin Impact"
 
-    utils.switch_to_window(game)
+    utils.window.switch_to_window(game)
 
     print("The script needs to be run as admin to interact with the game")
 
     for i in range(iterations):
-        process.run()
-        print(f"========== Iteration {i + 1} complete ==========")
+        friendship.run()
+        print(f"Iteration {i + 1} complete",  end="\r")
 
 
 if __name__ == "__main__":

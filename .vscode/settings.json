@@ -1,12 +1,18 @@
 {
   "cSpell.words": [
+    "autogui",
+    "enigo",
     "Genshin",
     "paimon",
     "paimon's",
     "psutil",
     "pyautogui",
     "pygetwindow",
-    "pygui"
+    "pygui",
+    "SHOWMAXIMIZED",
+    "winapi",
+    "windef",
+    "winuser"
   ],
   "python.analysis.typeCheckingMode": "basic"
 }

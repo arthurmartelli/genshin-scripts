@@ -18,6 +18,7 @@ Functions:
 """
 
 
+import time
 import pyautogui as pygui
 import utils
 
@@ -41,9 +42,14 @@ def walk_to_food() -> None:
     """
     white = (255, 255, 255)
     item_available_position = (1100, 560)
-    utils.press_key_for_duration("w", 3)
-    utils.press_key_until_color("w", item_available_position, white)
-    utils.press_key_for_duration("s", 0.5)
+    utils.actions.press_key_for_duration("w", 3)
+    utils.actions.press_key_until_event(
+        "w",
+        utils.events.wait_for_color,
+        item_available_position,
+        white
+    )
+    utils.actions.press_key_for_duration("s", 0.1)
 
 
 def give_food() -> None:
@@ -81,8 +87,15 @@ def walk_to_flower() -> None:
     """
     white = (255, 255, 255)
     item_available_position = (1100, 560)
-    utils.press_key_until_color("s", item_available_position, white)
-    utils.press_key_for_duration("w", 0.5)
+
+    utils.actions.press_key_for_duration("s", 3)
+    utils.actions.press_key_until_event(
+        "s",
+        utils.events.wait_for_color,
+        item_available_position,
+        white
+    )
+    utils.actions.press_key_for_duration("w", 0.1)
 
 
 def logout() -> None:
@@ -106,8 +119,10 @@ def logout() -> None:
     color = (236, 229, 216)
 
     pygui.press(esc)
-    utils.wait_for_color(wait_position, color)
+    utils.events.wait_for_color(wait_position, color)
+    time.sleep(1)
     pygui.click(exit_click[0], exit_click[1], 1)
+    time.sleep(1)
     pygui.click(confirmation_click[0], confirmation_click[1], 1)
 
 
@@ -128,23 +143,27 @@ def login() -> None:
 
     # white screen after logout -> wait until no longer white
     wait_first = (250, 200)
-    utils.wait_for_color(wait_first, white_color)
+    utils.events.wait_for_color(wait_first, white_color)
+    time.sleep(1)
     pygui.click(click_center[0], click_center[1], 1)
 
     # welcome screen -> wait until logout button appears (black)
     wait_second = (240, 910)  # logout button
-    utils.wait_for_color(wait_second, dark_gray_color)
+    utils.events.wait_for_color(wait_second, dark_gray_color)
+    time.sleep(1)
     pygui.click(click_center[0], click_center[1], 1)
 
     # click to enter screen (door appears) -> wait until text at the bottom appears
     wait_third = (1690, 780)
-    utils.wait_for_color(wait_third, white_color)
+    utils.events.wait_for_color(wait_third, white_color)
+    time.sleep(1)
     pygui.click(click_center[0], click_center[1], 1)
 
     # wait until login is confirmed (blue part of paimon's head by the minimap)
     paimon_pos = (200, 170)
     paimon_color = (71, 114, 167)
-    utils.wait_for_color(paimon_pos, paimon_color)
+    utils.events.wait_for_color(paimon_pos, paimon_color)
+    time.sleep(1)
 
 
 def run() -> None:
