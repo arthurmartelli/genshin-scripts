@@ -1,6 +1,6 @@
 
 import time
-from typing import Callable
+from typing import Callable, Any
 import pyautogui as pygui
 
 
@@ -23,13 +23,12 @@ def press_key_until_event(
     *args,
 ) -> None:
     """
-    Holds down the given key until the pixel at the given
-    position matches the given color.
+    Holds down the given key until the event returns true
 
     Args:
         key (str): key to hold down
-        position (tuple[int, int]): pixel position (x, y)
-        color (tuple[int, int, int]): color to match at the pixel position
+        event (Callable): event to wait for
+        *args: arguments to pass to the event
     """
     pygui.keyDown(key)
     event(*args)
