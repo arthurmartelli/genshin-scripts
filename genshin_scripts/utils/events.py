@@ -1,6 +1,5 @@
-
-
 import time
+
 import pyautogui as pygui
 
 

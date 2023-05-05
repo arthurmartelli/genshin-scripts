@@ -1,6 +1,7 @@
 
 import time
-from typing import Callable, Any
+from typing import Callable
+
 import pyautogui as pygui
 
 

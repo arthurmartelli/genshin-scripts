@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "genshin-friendship"
+name = "genshin_scripts"
 version = "0.1.0"
 description = "A Python project for automating tasks in Genshin Impact game"
 authors = ["Arthur Martelli <arthur.martellig@gmail.com>"]
 readme = "README.md"
 license = "MIT"
-packages = [{ include = "genshin_friendship" }]
+packages = [{ include = "genshin_scripts" }]
 
 [tool.poetry.dependencies]
 python = "^3.7.2"
@@ -13,6 +13,7 @@ autopep8 = "^2.0.2"
 pylint = "^2.17.2"
 pyautogui = "^0.9.53"
 pygetwindow = "^0.0.9"
+argparse = "^1.4.0"
 
 
 [build-system]
@@ -21,5 +22,5 @@ build-backend = "poetry.core.masonry.api"
 
 
 [tool.poe.tasks]
-run = { cmd = "poetry run python genshin_friendship/main.py", help = "Runs the program" }
-lint = { cmd = "poetry run pylint genshin_friendship/*", help = "Reviews the code with PyLint" }
+run = { cmd = "poetry run python genshin_scripts/main.py", help = "Runs the program" }
+lint = { cmd = "poetry run pylint genshin_scripts/*", help = "Reviews the code with PyLint" }

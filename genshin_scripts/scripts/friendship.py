@@ -2,23 +2,24 @@
 This module contains the main sequence to gain friendship with the bot
 
 The main sequence consists of four steps:
-1. Login to the game
-2. Walk forward for 'duration' seconds
-3. Give food to the dog
-4. Wal back for 'duration' seconds
-5. Logout of the game
+    1. Login to the game
+    2. Walk forward for 'duration' seconds
+    3. Give food to the dog
+    4. Wal back for 'duration' seconds
+    5. Logout of the game
 
 Functions:
-- walk_to_food: walks until food bowl is available
-- give_food: activate food interaction and give food to the dog
-- walk_to_flower: walks until the flower is available
-- logout: logs out of the game
-- login: logs in to the game
-- run: main sequence to gain friendship with the bot
+    - walk_to_food: walks until food bowl is available
+    - give_food: activate food interaction and give food to the dog
+    - walk_to_flower: walks until the flower is available
+    - logout: logs out of the game
+    - login: logs in to the game
+    - run: main sequence to gain friendship with the bot
 """
 
 
 import time
+
 import pyautogui as pygui
 import utils
 
@@ -33,12 +34,6 @@ def walk_to_food() -> None:
     walk forward until it reaches the position of the food bowl, indicated by a
     white color. Finally, it turns around for half a second to position the
     character in front of the food bowl.
-
-    Args:
-        None
-
-    Returns:
-        None
     """
     white = (255, 255, 255)
     item_available_position = (1100, 560)
@@ -58,12 +53,6 @@ def give_food() -> None:
 
     This function presses the 'f' key to activate the food interaction and then clicks
     on the position (1060, 740) to give the food item to the dog.
-
-    Args:
-        None
-
-    Returns:
-        None
     """
     interaction_key = "f"
     position = (1060, 740)
@@ -78,12 +67,6 @@ def walk_to_flower() -> None:
     Uses the 'utils.press_key_until_color()' function to continuously move backward
     ('s' key) until the white color at the position of the flower is detected on the
     screen. Then, turns around ('w' key) for a short duration of time.
-
-    Args:
-        None
-
-    Returns:
-        None
     """
     white = (255, 255, 255)
     item_available_position = (1100, 560)
@@ -105,12 +88,6 @@ def logout() -> None:
     Presses the 'Esc' key to open the menu, waits until the menu appears,
     clicks the 'Exit' button, clicks the confirmation button to return to
     the main menu, and logs out of the game.
-
-    Args:
-        None
-
-    Returns:
-        None
     """
     esc = "esc"
     exit_click = (210, 950)
@@ -130,12 +107,6 @@ def login() -> None:
     """
     Logs into the game by clicking through the
     initial screens until the login is confirmed.
-
-    Args:
-        None
-
-    Returns:
-        None
     """
     click_center = (950, 600)
     white_color = (255, 255, 255)
@@ -166,22 +137,25 @@ def login() -> None:
     time.sleep(1)
 
 
-def run() -> None:
+def run(iterations: int = 10) -> None:
     """
     Runs the main sequence to gain friendship with the bot.
 
     The sequence involves resetting and activating the event, logging
     back in to the game, walking to the food bowl, giving the food item
     to the bot, and walking back to the flower.
-
-    Args:
-        None
-
-    Returns:
-        None
     """
-    logout()  # reset and activate event
-    login()  # log back
-    walk_to_food()  # walk to food bowl
-    give_food()  # give the food item
-    walk_to_flower()  # walk back to flower
+    iterations = 10
+    game = "Genshin Impact"
+
+    utils.window.switch_to_window(game)
+
+    print("The script needs to be run as admin to interact with the game")
+
+    for i in range(iterations):
+        logout()  # reset and activate event
+        login()  # log back
+        walk_to_food()  # walk to food bowl
+        give_food()  # give the food item
+        walk_to_flower()  # walk back to flower
+        print(f"Iteration {i + 1} complete",  end="\r")
