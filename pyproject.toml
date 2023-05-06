@@ -8,19 +8,34 @@ license = "MIT"
 packages = [{ include = "genshin_scripts" }]
 
 [tool.poetry.dependencies]
-python = "^3.7.2"
+python = "^3.11"
+pylint = "^2.17.3"
+pytest = "^7.3.1"
 autopep8 = "^2.0.2"
-pylint = "^2.17.2"
 pyautogui = "^0.9.53"
 pygetwindow = "^0.0.9"
 argparse = "^1.4.0"
-
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.poe.tasks.run]
+help = "Runs the program"
+cmd = "python project/main.py"
 
-[tool.poe.tasks]
-run = { cmd = "poetry run python genshin_scripts/main.py", help = "Runs the program" }
-lint = { cmd = "poetry run pylint genshin_scripts/*", help = "Reviews the code with PyLint" }
+[tool.poe.tasks.lint]
+help = "Reviews the code with PyLint"
+cmd = "pylint project/*"
+
+[tool.poe.tasks.test]
+help = "Runs testing with PyTest"
+sequence = [
+    { cmd = "poetry install" },
+    { cmd = "poetry build" },
+    { cmd = "pytest" },
+]
+
+[tool.poe.tasks.export]
+help = "Export project's requirement.txt"
+cmd = "poetry export -f requirements.txt --output requirements.txt"

@@ -1,13 +1,13 @@
-from argparse import ArgumentParser
-from typing import Any, Protocol, Tuple, Dict
+from argparse import ArgumentParser, Namespace
+from typing import Any, Protocol, Dict
 
 
 class Script(Protocol):
     name: str
-    args: Tuple[Any]
-    kwargs: Dict
+    args: Any
+    kwargs: Dict[str, Any]
 
-    def __init__(self, name: str, *args, **kwargs) -> None:
+    def __init__(self, name: str, *args: Any, **kwargs: Dict[str, Any]) -> None:
         self.name = name
         self.args = args
         self.kwargs = kwargs
@@ -15,8 +15,8 @@ class Script(Protocol):
     def __str__(self) -> str:
         return self.name
 
-    def add_arguments(self, subparsers: ArgumentParser):
+    def add_arguments(self, parser: ArgumentParser):
         ...
 
-    def run(self, *args, **kwargs):
+    def run(self, args: Namespace):
         ...

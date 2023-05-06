@@ -15,7 +15,7 @@
     "windef",
     "winuser"
   ],
-  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.typeCheckingMode": "strict",
   "[python]": {
     "editor.defaultFormatter": "ms-python.autopep8"
   },

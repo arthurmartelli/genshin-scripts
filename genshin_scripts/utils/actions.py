@@ -1,6 +1,6 @@
 
 import time
-from typing import Callable
+from typing import Any, Callable
 
 import pyautogui as pygui
 
@@ -20,8 +20,8 @@ def press_key_for_duration(key: str, duration: float) -> None:
 
 def press_key_until_event(
     key: str,
-    event: Callable,
-    *args,
+    event: Callable[..., None],
+    *args: Any,
 ) -> None:
     """
     Holds down the given key until the event returns true
