@@ -7,21 +7,51 @@ The main sequence consists of four steps:
     3. Give food to the dog
     4. Wal back for 'duration' seconds
     5. Logout of the game
-
-Functions:
-    - walk_to_food: walks until food bowl is available
-    - give_food: activate food interaction and give food to the dog
-    - walk_to_flower: walks until the flower is available
-    - logout: logs out of the game
-    - login: logs in to the game
-    - run: main sequence to gain friendship with the bot
 """
 
 
 import time
+from argparse import ArgumentParser, Namespace
 
 import pyautogui as pygui
 import utils
+
+from .options import Script
+
+
+class Friendship(Script):
+    def __init__(self):
+        super().__init__(name="friendship")
+
+    def run(self, args: Namespace):
+        """
+        Runs the main sequence to gain friendship with the bot.
+
+        The sequence involves resetting and activating the event, logging
+        back in to the game, walking to the food bowl, giving the food item
+        to the bot, and walking back to the flower.
+        """
+        iterations = args.iterations if 'iterations' in args else 10
+
+        for i in range(iterations):
+            logout()  # reset and activate event
+            login()  # log back
+            walk_to_food()  # walk to food bowl
+            give_food()  # give the food item
+            walk_to_flower()  # walk back to flower
+            print(f"Iteration {i + 1} complete", end='\r')
+
+        print()
+
+    def add_arguments(self, parser: ArgumentParser):
+        parser.add_argument(
+            "-i",
+            "--iterations",
+            default=10,
+            required=False,
+            type=int,
+            help="Number of times to run the script, defaults to 10",
+        )
 
 
 def walk_to_food() -> None:
@@ -135,27 +165,3 @@ def login() -> None:
     paimon_color = (71, 114, 167)
     utils.events.wait_for_color(paimon_pos, paimon_color)
     time.sleep(1)
-
-
-def run(iterations: int = 10) -> None:
-    """
-    Runs the main sequence to gain friendship with the bot.
-
-    The sequence involves resetting and activating the event, logging
-    back in to the game, walking to the food bowl, giving the food item
-    to the bot, and walking back to the flower.
-    """
-    iterations = 10
-    game = "Genshin Impact"
-
-    utils.window.switch_to_window(game)
-
-    print("The script needs to be run as admin to interact with the game")
-
-    for i in range(iterations):
-        logout()  # reset and activate event
-        login()  # log back
-        walk_to_food()  # walk to food bowl
-        give_food()  # give the food item
-        walk_to_flower()  # walk back to flower
-        print(f"Iteration {i + 1} complete",  end="\r")

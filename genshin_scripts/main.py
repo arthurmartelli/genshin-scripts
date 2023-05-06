@@ -21,6 +21,13 @@ Modules:
 """
 
 import cli
+from scripts import friendship
+from utils import window
+
+
+def setup() -> None:
+    game = "Genshin Impact"
+    window.switch_to_window(game)
 
 
 def main() -> None:
@@ -33,7 +40,14 @@ def main() -> None:
     - The game needs to be in the center of the screen (automatically done).
     - The script needs to be run as admin to interact with the game.
     """
-    cli.args.parse()
+    print("The script needs to be run as admin to interact with the game")
+    setup()
+
+    choices = [
+        friendship.Friendship()
+    ]
+
+    cli.args.parse(choices)
 
 
 if __name__ == "__main__":
