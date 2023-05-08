@@ -22,7 +22,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poe.tasks.run]
 help = "Runs the program"
-cmd = "python project/main.py"
+cmd = "python genshin_scripts/main.py"
 
 [tool.poe.tasks.lint]
 help = "Reviews the code with PyLint"
